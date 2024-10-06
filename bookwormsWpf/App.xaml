@@ -1,0 +1,97 @@
+﻿<Application x:Class="bookwormsWpf.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:bookwormsWpf"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        
+        <!--универсальный стиль для текста-->
+        <Style x:Key="TotalFont">
+            <Setter Property="Control.FontFamily" Value="Matura MT Script Capitals"/>
+            <Setter Property="Control.FontSize" Value="28"/>
+        </Style>
+        
+        <!--стиль для заголовка-->
+        <Style x:Key="headerText" BasedOn="{StaticResource TotalFont}">
+            <Setter Property="Control.HorizontalAlignment" Value ="Center"/>
+            <Setter Property="Control.VerticalAlignment" Value="Center"/>
+            <!-- так можно поменять значение только одного property дочернего стиля-->
+            <Setter Property="ItemsControl.FontSize" Value="32"/>
+        </Style>
+        
+        <!--стиль для класса textblock-->
+        <Style x:Key="anyTextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TotalFont}">
+            <Style.Setters>
+                <Setter Property="TextBlock.Background" Value="Transparent"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="HorizontalAlignment" Value ="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+
+        <!--стиль с увеличением текста textblock при наведении-->
+        <Style x:Key="enlargeFontTextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource anyTextBlock}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontSize" Value="40"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--кнопка Обыкновенная-->
+        <Style x:Key="simpleButton" TargetType="{x:Type Button}">
+            <Style.Setters>
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="#9E9E9E"/>
+                <Setter Property="BorderThickness" Value="3" />
+                <Setter Property="Button.FontSize" Value="28"/>
+                <Setter Property="FontFamily" Value="Matura MT Script Capitals"/>
+            </Style.Setters>
+        </Style>
+        <!--кнопка закругленная-->
+        <Style x:Key="roundedButton" TargetType="{x:Type Button}">
+            <Style.Setters>
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Button.FontSize" Value="28"/>
+                <Setter Property="FontFamily" Value="Matura MT Script Capitals"/>
+            </Style.Setters>
+        </Style>
+        <!--стиль кнопки с увеличением при наведении-->
+        <Style x:Key="EnlargeButton" TargetType="{x:Type Button}">
+            <Style.Setters>
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Button.FontSize" Value="28"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Height" Value="100"/>
+                    <!--?размер кнопки в ширину не меняется-->
+                    <Setter Property="Width" Value="400"/>
+                    <!--?размер шрифта на кнопке не меняется-->
+                    <Setter Property="FontSize" Value="40"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--стиль кнопки с поворотом при нажатии-->
+        <Style x:Key="ButtonRotate" TargetType="{x:Type Button}" >
+            <Style.Setters>
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Button.FontSize" Value="28"/>
+            </Style.Setters>
+            <!--триггер при нажатии на кнопку-поворот на 10 градусов-->
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <RotateTransform Angle="10"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </Application.Resources>
+</Application>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookwormsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="AuthorId" />
+    </Key>
+    <Property Name="AuthorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuthorName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AuthorSurname" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="AuthorPatronimicName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Item" Relationship="Self.item_fk2" FromRole="Author" ToRole="Item" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="GenreId" />
+    </Key>
+    <Property Name="GenreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GenreName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Item" Relationship="Self.item_fk" FromRole="Genre" ToRole="Item" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="ItemId" />
+    </Key>
+    <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ItemGenre" Type="Int32" Nullable="false" />
+    <Property Name="ItemAuthor" Type="Int32" Nullable="false" />
+    <Property Name="ItemCost" Type="Double" Nullable="false" />
+    <Property Name="ItemDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ItemPhotoString" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ItemPhotoByte" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Author" Relationship="Self.item_fk2" FromRole="Item" ToRole="Author" />
+    <NavigationProperty Name="Genre" Relationship="Self.item_fk" FromRole="Item" ToRole="Genre" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="item_fk2">
+    <End Role="Author" Type="Self.Author" Multiplicity="1" />
+    <End Role="Item" Type="Self.Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorId" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="ItemAuthor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="item_fk">
+    <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+    <End Role="Item" Type="Self.Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="GenreId" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="ItemGenre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BookwormsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Author" EntityType="Self.Author" />
+    <EntitySet Name="Genre" EntityType="Self.Genre" />
+    <EntitySet Name="Item" EntityType="Self.Item" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <AssociationSet Name="item_fk2" Association="Self.item_fk2">
+      <End Role="Author" EntitySet="Author" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="item_fk" Association="Self.item_fk">
+      <End Role="Genre" EntitySet="Genre" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

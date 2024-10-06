@@ -1,0 +1,77 @@
+﻿<Window x:Class="bookwormsWpf.View.Catalogue"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:bookwormsWpf.View"
+        mc:Ignorable="d"
+        Title="Catalogue" Height="450" Width="800" MinHeight="500" MinWidth="460" MaxHeight="600" MaxWidth="1400">
+    <Grid Background="#EEEEEE">
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="150*"/>
+
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="\Resources/logo.png" Width="60"/>
+            <TextBlock Grid.Column="1" Text="Catalogue" Style="{StaticResource headerText}"/>
+            <Button x:Name="fromAuthorisetoMain" Grid.Column="2" Click="fromCataloguetoMain_Click"  Style="{StaticResource simpleButton}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Main menu" Style="{StaticResource anyTextBlock}"/>
+                        <Image Source="\Resources/exit.png" Width="50"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox Name="cbSort" Grid.Column="0" SelectionChanged="cbSort_SelectionChanged" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="267">
+                <ComboBoxItem Content="без сортировки по цене"/>
+                <ComboBoxItem Content="по возрастанию цены "/>
+                <ComboBoxItem Content="по убыванию цены"/>
+            </ComboBox>
+            <ComboBox Name="cbGenre" Grid.Column="1" SelectionChanged="cbGenre_SelectionChanged"  Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="267">
+            </ComboBox>
+            <TextBox x:Name="tbSearch" Grid.Column="2" SelectionChanged="tbSearch_SelectionChanged"/>
+            
+        </Grid>
+        <Grid Grid.Row="2">
+            <DataGrid x:Name="dgItem" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Width="200"  Binding= "{Binding ItemName}"/>
+                    <DataGridTextColumn Header="Genre" Width="180" Binding= "{Binding Genre.GenreName}"/>
+                    <DataGridTextColumn Header="Author's name" Width="*" Binding= "{Binding Author.AuthorName}"/>
+                    <DataGridTextColumn Header="Surname" Width="*" Binding= "{Binding Author.AuthorSurname}"/>
+                    <DataGridTextColumn Header="Price" Width="*" Binding= "{Binding ItemCost}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!--<ListView Grid.Row="1" Name="lvItems" SelectionChanged="lvItems_SelectionChanged_1" Background="#FFD6D6D6">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="title" Width="220" DisplayMemberBinding= "{Binding ItemName}"/>
+                        <GridViewColumn Header="genre" Width="120" DisplayMemberBinding= "{Binding Genre.GenreName}"/>
+                        <GridViewColumn Header="author's name" Width="140" DisplayMemberBinding= "{Binding Author.AuthorName}"/>
+                        <GridViewColumn Header="surname" Width="220" DisplayMemberBinding= "{Binding Author.AuthorSurname}"/>
+                        <GridViewColumn Header="price" Width="100" DisplayMemberBinding= "{Binding ItemCost}"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>-->
+        
+
+    </Grid>
+</Window>

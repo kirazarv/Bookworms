@@ -1,0 +1,72 @@
+﻿<Window x:Class="bookwormsWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:bookwormsWpf"
+        mc:Ignorable="d"
+        Title="Bookworms" Height="450" Width="800" MinHeight="500" MinWidth="460" MaxHeight="600" MaxWidth="1400"
+        Icon="Resources/bookworm.ico">
+    <Grid Background="#EEEEEE">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <!--Заголовок-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="Resources/logo.png" HorizontalAlignment="Left"  Margin="3"/>
+            <TextBlock Grid.Column="1" Text="Join bookworms"  Style="{StaticResource headerText}"/>
+            <Button x:Name="butNav" Grid.Column="2" Click="butNav_Click" Style="{StaticResource simpleButton}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/exit.png" Width="40"/>
+                        <TextBlock Text="exit" Style="{StaticResource anyTextBlock}" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Grid>
+
+            <!--ФУНКЦИОНАЛЬНАЯ ЧАСТЬ-->
+        <!--stackpanel для 3-х кнопок ряда 1-->
+            <StackPanel Grid.Row="1" Orientation="Vertical">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="Resources/whitegrad.jpg"/>
+                </StackPanel.Background>
+            <Border BorderBrush="DarkGray" BorderThickness="5" CornerRadius="40" Margin="80 20">
+                <Button x:Name="butCatalogue" Click="butCatalogue_Click" Style="{StaticResource EnlargeButton}">
+                        <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/bookcatalogue.png" Width="50"/>
+                        <TextBlock Text="Catalogue" Style="{StaticResource enlargeFontTextBlock}"/>
+                        </StackPanel>
+                </Button>
+            </Border>
+            
+            <Border BorderBrush="DarkGray" BorderThickness="5" CornerRadius="40" Margin="80 20">
+                <Button x:Name="butOrder" Click="butOrder_Click" Style="{StaticResource EnlargeButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/order.png" Width="50"/>
+                        <TextBlock Text="Place an order" Style="{StaticResource enlargeFontTextBlock}"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+            <Border BorderBrush="DarkGray" BorderThickness="5" CornerRadius="40" Margin="80 20">
+                <Button x:Name="butAdmin"  Click="butAdmin_Click" Style="{StaticResource ButtonRotate}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resources/admin.png" Width="50"/>
+                        <TextBlock Text="Admin" Style="{StaticResource anyTextBlock}"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+        
+            </StackPanel>
+
+
+    </Grid>
+    
+</Window>
